@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Совсем чуть чуть обо мне</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis optio voluptates nemo assumenda rerum magni vero autem recusandae. Cumque minima deleniti officiis accusamus mollitia et aliquam, hic esse nesciunt in error tempora obcaecati ex explicabo voluptatem numquam, non vitae, facilis culpa. Veritatis sapiente nihil expedita, in amet tenetur delectus obcaecati sint! Eum ullam tempore illo at perferendis est debitis sed minima numquam doloribus minus unde exercitationem odio, magni doloremque hic possimus illum ipsam! Accusantium obcaecati, praesentium iusto esse vero magnam, quod optio explicabo eos similique asperiores harum modi aliquid veritatis? Distinctio nihil excepturi fugiat voluptatem ut, id neque voluptatum iure?</p>
+    <h2 class="counter">counter</h2>
+</body>
+<script>
+    const counter = document.querySelector('.counter');
+
+    fetch('./counter.json')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Ой, ошибка в fetch: ' + response.statusText +' '+ response.url);
+    }
+    return response.json();
+  })
+  .then(jsonData => {
+    counter.textContent =`Количество входов ${jsonData["/about.html"]}"`;
+  })
+  .catch(error => console.error('Ошибка при исполнении запроса: ', error));
+</script>
+</html>
