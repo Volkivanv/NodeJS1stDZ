@@ -13,6 +13,7 @@
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae modi quidem mollitia est cumque, accusantium dolore rerum molestiae voluptate sed fugiat repudiandae! Laudantium minus, optio voluptatibus repudiandae maiores officia accusamus.
     </p>
     <h2 class="counter">Counter</h2>
+    <a href="./about.html">Обо мне</a>
 </body>
 <script>
     const counter = document.querySelector('.counter');
@@ -25,7 +26,7 @@
     return response.json();
   })
   .then(jsonData => {
-    counter.textContent =`Количество входов ${jsonData["/"]}"`;
+    counter.textContent =`Количество входов ${jsonData["/"]}`;
   })
   .catch(error => console.error('Ошибка при исполнении запроса: ', error));
 </script>

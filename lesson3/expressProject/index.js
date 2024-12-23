@@ -15,6 +15,7 @@ app.use((req, res, next) => {
   // console.log(req.url);
   
   let count = ++jsonData[req.url];
+  console.log(req.url);
   console.log(count);
   const jsonString = JSON.stringify(jsonData);
   try {

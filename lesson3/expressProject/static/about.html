@@ -9,6 +9,7 @@
     <h1>Совсем чуть чуть обо мне</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis optio voluptates nemo assumenda rerum magni vero autem recusandae. Cumque minima deleniti officiis accusamus mollitia et aliquam, hic esse nesciunt in error tempora obcaecati ex explicabo voluptatem numquam, non vitae, facilis culpa. Veritatis sapiente nihil expedita, in amet tenetur delectus obcaecati sint! Eum ullam tempore illo at perferendis est debitis sed minima numquam doloribus minus unde exercitationem odio, magni doloremque hic possimus illum ipsam! Accusantium obcaecati, praesentium iusto esse vero magnam, quod optio explicabo eos similique asperiores harum modi aliquid veritatis? Distinctio nihil excepturi fugiat voluptatem ut, id neque voluptatum iure?</p>
     <h2 class="counter">counter</h2>
+    <a href="./">Главная</a>
 </body>
 <script>
     const counter = document.querySelector('.counter');
@@ -21,7 +22,7 @@
     return response.json();
   })
   .then(jsonData => {
-    counter.textContent =`Количество входов ${jsonData["/about.html"]}"`;
+    counter.textContent =`Количество входов ${jsonData["/about.html"]}`;
   })
   .catch(error => console.error('Ошибка при исполнении запроса: ', error));
 </script>
