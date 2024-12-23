@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const jsonData = require("./static/counter.json");
 const app = express();
-//const jsonData = require("./static/counter.json");
+
 
 // app.use ((req, res, next) => {
 //     console.log('Поступил запрос', req.method, req.url);
@@ -39,9 +39,9 @@ app.use(express.static("static"));
 //   console.log(jsonData["index.html"]);
 // });
 
-app.get("./counter.json", (req, res) => {
-  res.sendFile(JSON.stringify(jsonData));
-});
+// app.get("./counter.json", (req, res) => {
+//   res.sendFile(JSON.stringify(jsonData));
+// });
 
 // app.get("/about", (req, res) => {
 //   res.append("<h2>Привет</h2>");
