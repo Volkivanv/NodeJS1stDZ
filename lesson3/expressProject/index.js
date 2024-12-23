@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   let count = ++jsonData[req.url];
   console.log(req.url);
   console.log(count);
-  const jsonString = JSON.stringify(jsonData);
+  const jsonString = JSON.stringify(jsonData, null, 2);
   try {
     fs.writeFileSync("./static/counter.json", jsonString);
     console.log("JSON data saved to file successfully.");
