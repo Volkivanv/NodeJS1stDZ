@@ -1,47 +1,59 @@
 const express = require('express');
+const path = require('path');
 const { checkBody, checkParams } = require('./validation/validator');
-const { idScheme, articleScheme } = require('./validation/scheme');
-//const Joi = require('joi');
-
+const { idScheme, personScheme: personScheme } = require('./validation/scheme');
+const {saveJSON} = require('./repository/save');
 const app = express();
-
+let persons;
 let uniqueID = 0;
-const articles = [];
+const personsPath = path.join(__dirname, 'persons.json');
 
+try{
+    persons = require(personsPath);
+    persons.forEach(element => {
+        if (element.id > uniqueID){
+            uniqueID = element.id;
+        }
+    });
+} catch (error) {
+    persons = [];
+  //  console.error("Error reading JSON data to file:", error);
+    
+}
 
 app.use(express.json());
 
 /**
- * Получить все статьи
+ * Получить всех пользователей
  */
 
-app.get('/articles', (req, res) => {
-    res.send({ articles });
+app.get('/persons', (req, res) => {
+    res.send({ persons: persons });
 });
 
 /**
- * Получить конкретную статью
+ * Получить конкретного пользователя
  */
 
-app.get('/articles/:id', checkParams(idScheme), (req, res) => {
-    const article = articles.find((article) => article.id === Number(req.params.id));
+app.get('/persons/:id', checkParams(idScheme), (req, res) => {
+    const person = persons.find((person) => person.id === Number(req.params.id));
 
-    if (article) {
-        res.send({ article });
+    if (person) {
+        res.send({ person: person });
     } else {
         res.status(404);
-        res.send({article: null });
+        res.send({person: null });
     }
 });
 
 /**
- * Создание статьи
+ * Создание пользователя
  */
-app.post('/articles', checkBody(articleScheme), (req, res) => {
+app.post('/persons', checkBody(personScheme), (req, res) => {
 
     uniqueID += 1;
 
-    articles.push({
+    persons.push({
         id: uniqueID,
         ...req.body
     });
@@ -49,41 +61,50 @@ app.post('/articles', checkBody(articleScheme), (req, res) => {
     res.send({
         id: uniqueID,
     });
+
+    saveJSON(personsPath, persons);
+    
 });
 
 /**
- * Обновление статьи
+ * Обновление пользователя
  */
-app.put('/articles/:id', checkParams(idScheme), checkBody(articleScheme), (req, res) => {
+app.put('/persons/:id', checkParams(idScheme), checkBody(personScheme), (req, res) => {
 
-    const article = articles.find((article) => article.id === Number(req.params.id));
+    const person = persons.find((person) => person.id === Number(req.params.id));
 
-    if (article) {
-        article.title = req.body.title;
-        article.content = req.body.content;
+    if (person) {
+        person.name = req.body.name;
+        person.surname = req.body.surname;
+        person.age = req.body.age;
+        description = req.body.description;
 
-        res.send({ article });
+        res.send({ person: person });
+        saveJSON(personsPath, persons);
     } else {
         res.status(404);
         res.send({ article: null });
     }
+
 });
 
 /**
- * Удаление статьи
+ * Удаление пользователя
  */
-app.delete('/articles/:id', checkParams(idScheme), (req, res) => {
-    const article = articles.find((article) => article.id === Number(req.params.id));
+app.delete('/persons/:id', checkParams(idScheme), (req, res) => {
+    const person = persons.find((person) => person.id === Number(req.params.id));
 
-    if (article) {
-        const articleIndex = articles.indexOf(article);
-        articles.splice(articleIndex, 1);
+    if (person) {
+        const personIndex = persons.indexOf(person);
+        persons.splice(personIndex, 1);
 
-        res.send({ article });
+        res.send({ person: person });
+        saveJSON(personsPath, persons);
     } else {
         res.status(404);
-        res.send({ article: null });
+        res.send({ person: null });
     }
+
 });
 /**
  * Обработка не существующих маршрутов
@@ -94,4 +115,4 @@ app.use((req, res) => {
     })
 });
 
-app.listen(3000);
+app.listen(3000); 

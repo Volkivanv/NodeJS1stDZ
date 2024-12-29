@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "John",
+    "surname": "Petrov",
+    "age": 25,
+    "description": "Какое то описание"
+  },
+  {
+    "id": 2,
+    "name": "John",
+    "surname": "Petrov",
+    "age": 25,
+    "description": "Какое то описание"
+  },
+  {
+    "id": 3,
+    "name": "John",
+    "surname": "Petrov",
+    "age": 25,
+    "description": "Какое то описание"
+  },
+  {
+    "id": 4,
+    "name": "John",
+    "surname": "Petrov",
+    "age": 25,
+    "description": "Какое то описание"
+  }
+]

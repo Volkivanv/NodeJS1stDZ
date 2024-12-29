@@ -1,12 +1,14 @@
 const Joi = require('joi');
 
-const articleScheme = Joi.object({
-    title: Joi.string().min(5).required(),
-    content: Joi.string().min(10).required(),
+const personScheme = Joi.object({
+    name: Joi.string().min(1).required(),
+    surname: Joi.string().min(1).required(),
+    age: Joi.number().integer().greater(10),
+    description: Joi.string().min(10).required(),
 });
 
 const idScheme = Joi.object({
     id: Joi.number().required(),
 })
 
-module.exports = {articleScheme, idScheme};
+module.exports = {personScheme: personScheme, idScheme};
